@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>مسار الدين الخارجي المصري (2014–2026)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--blue:#378ADD;--coral:#D85A30;--teal:#1D9E75;--amber:#BA7517;--gray:#888780;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:"Tajawal",sans-serif;background:#fff;color:#2c2c2a;direction:rtl;}
+  #root{padding:clamp(12px,3vw,20px);}
+  .hdr{border-right:3px solid #D85A30;padding-right:10px;margin-bottom:10px;}
+  .tag{font-size:clamp(9px,2vw,10px);font-weight:700;letter-spacing:.06em;color:var(--gray);margin-bottom:2px;}
+  .title{font-size:clamp(13px,3.5vw,15px);font-weight:700;line-height:1.4;margin-bottom:2px;}
+  .subtitle{font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;}
+  .callout{background:#f1efe8;border-right:3px solid #D85A30;padding:8px 11px;font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;line-height:1.6;margin:9px 0;font-style:italic;}
+  .source{font-size:clamp(9px,2vw,10px);color:var(--gray);margin-top:10px;line-height:1.4;text-align:right;}
+  .cards{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+  .card{flex:1;min-width:min(100px,44%);border-radius:8px;padding:clamp(9px,2.5vw,12px) clamp(10px,3vw,13px);}
+  @media(prefers-color-scheme:dark){
+    body{background:#1a1a18;color:#d3d1c7;}
+    .callout{background:#2c2c2a;color:#b4b2a9;}
+    .subtitle,.source{color:#b4b2a9;}
+  }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="hdr">
+    <p class="tag">زاوية ثالثة · إنفوجرافيك ② من ⑧</p>
+    <p class="title">مسار الدين الخارجي المصري (2014–2026)</p>
+    <p class="subtitle">مليار دولار — تضاعف 3.5 مرة في 12 عامًا</p>
+  </div>
+  <div class="callout">"ارتفع الدين الخارجي من 46.1 مليار دولار بنهاية 2013/2014 إلى 161.2 مليار دولار بنهاية 2024/2025، بزيادة 250% في 12 عامًا"</div>
+  
+<div class="cards" style="margin-bottom:12px">
+  <div class="card" style="background:#edf7f3;text-align:center">
+    <p style="font-size:clamp(9px,2.2vw,10px);color:#5f5e5a;margin-bottom:3px">2014 — نقطة البداية</p>
+    <p style="font-size:clamp(18px,5vw,22px);font-weight:800;color:#1D9E75" id="v1">0</p>
+    <p style="font-size:clamp(9px,2vw,10px);color:#888780;margin-top:1px">مليار دولار</p>
+  </div>
+  <div class="card" style="background:#faece7;text-align:center">
+    <p style="font-size:clamp(9px,2.2vw,10px);color:#993C1D;margin-bottom:3px">الذروة 2023</p>
+    <p style="font-size:clamp(18px,5vw,22px);font-weight:800;color:#D85A30" id="v2">0</p>
+    <p style="font-size:clamp(9px,2vw,10px);color:#888780;margin-top:1px">مليار دولار</p>
+  </div>
+  <div class="card" style="background:#faece7;text-align:center">
+    <p style="font-size:clamp(9px,2.2vw,10px);color:#993C1D;margin-bottom:3px">الزيادة</p>
+    <p style="font-size:clamp(18px,5vw,22px);font-weight:800;color:#D85A30">+250%</p>
+  </div>
+</div>
+<div style="position:relative;width:100%;height:clamp(180px,46vw,210px)"><canvas id="c"></canvas></div>
+<script>
+(function(){
+  var dk=matchMedia("(prefers-color-scheme:dark)").matches;
+  var tc=dk?"#b4b2a9":"#5f5e5a",gc=dk?"rgba(255,255,255,.08)":"rgba(0,0,0,.07)";
+  var coral=dk?"#F0997B":"#D85A30",teal=dk?"#5DCAA5":"#1D9E75",blue=dk?"#85B7EB":"#378ADD";
+  var labels=[
+    "2014","2015","2016","2017","2018","2021","2022",
+    ["2023","(ذروة)"],
+    ["يونيو","2025"],
+    ["مارس","2026"]
+  ];
+  var data=[46.1,47.8,67.3,82.8,88.1,146.0,163.1,168.2,161.2,164.8];
+  var colors=data.map(function(v,i){return i===7?coral:(i===0?teal:blue);});
+  new Chart(document.getElementById("c"),{type:"bar",
+    data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderWidth:0,borderRadius:3}]},
+    options:{responsive:true,maintainAspectRatio:false,animation:{duration:1000,easing:"easeOutQuart",delay:function(c){return c.dataIndex*50;}},
+    plugins:{legend:{display:false},tooltip:{backgroundColor:dk?"#2c2c2a":"#fff",borderColor:dk?"rgba(255,255,255,.1)":"rgba(0,0,0,.08)",borderWidth:1,titleColor:dk?"#d3d1c7":"#2c2c2a",bodyColor:tc,padding:10,titleFont:{family:"Tajawal"},bodyFont:{family:"Tajawal"},callbacks:{label:function(c){return c.raw+" مليار دولار";}}}},
+    scales:{x:{ticks:{color:tc,font:{size:8,family:"Tajawal"},maxRotation:0},grid:{display:false},border:{color:gc}},
+    y:{ticks:{color:tc,font:{size:9,family:"Tajawal"},callback:function(v){return v+"B$";}},grid:{color:gc},border:{display:false}}}}
+  });
+  var s=null;
+  function cu(ts){if(!s)s=ts;var p=Math.min((ts-s)/900,1),e=1-Math.pow(1-p,3);
+    document.getElementById("v1").textContent=(e*46.1).toFixed(1);
+    document.getElementById("v2").textContent=(e*168.2).toFixed(1);
+    if(p<1)requestAnimationFrame(cu);else{document.getElementById("v1").textContent="46.1";document.getElementById("v2").textContent="168.2";}
+  }
+  setTimeout(function(){requestAnimationFrame(cu);},100);
+})();
+</script>
+  <p class="source">المصدر: البنك المركزي المصري / CEIC / Macrotrends</p>
+</div>
+<script>
+(function(){
+  function notify(){var h=document.getElementById("root").offsetHeight;window.parent.postMessage({type:"chartResize",height:h},"*");}
+  setTimeout(notify,1400);window.addEventListener("resize",notify);
+  try{new ResizeObserver(function(){setTimeout(notify,80);}).observe(document.body);}catch(e){}
+})();
+</script>
+</body></html>

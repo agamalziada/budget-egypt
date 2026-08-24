@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>15 عامًا بلا انتخابات محلية في مصر</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--blue:#378ADD;--coral:#D85A30;--teal:#1D9E75;--amber:#BA7517;--gray:#888780;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:"Tajawal",sans-serif;background:#fff;color:#2c2c2a;direction:rtl;}
+  #root{padding:clamp(12px,3vw,20px);}
+  .hdr{border-right:3px solid #D85A30;padding-right:10px;margin-bottom:10px;}
+  .tag{font-size:clamp(9px,2vw,10px);font-weight:700;letter-spacing:.06em;color:var(--gray);margin-bottom:2px;}
+  .title{font-size:clamp(13px,3.5vw,15px);font-weight:700;line-height:1.4;margin-bottom:2px;}
+  .subtitle{font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;}
+  .callout{background:#f1efe8;border-right:3px solid #D85A30;padding:8px 11px;font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;line-height:1.6;margin:9px 0;font-style:italic;}
+  .source{font-size:clamp(9px,2vw,10px);color:var(--gray);margin-top:10px;line-height:1.4;text-align:right;}
+  .cards{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+  .card{flex:1;min-width:min(100px,44%);border-radius:8px;padding:clamp(9px,2.5vw,12px) clamp(10px,3vw,13px);}
+  @media(prefers-color-scheme:dark){
+    body{background:#1a1a18;color:#d3d1c7;}
+    .callout{background:#2c2c2a;color:#b4b2a9;}
+    .subtitle,.source{color:#b4b2a9;}
+  }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="hdr">
+    <p class="tag">زاوية ثالثة · إنفوجرافيك ⑧ من ⑧</p>
+    <p class="title">15 عامًا بلا انتخابات محلية في مصر</p>
+    <p class="subtitle">أُنجزت 4 استحقاقات دستورية والخامس — الأقرب للمواطن — غائب</p>
+  </div>
+  <div class="callout">"لم تشهد مصر انتخابات لمجالسها المحلية منذ 2011 — رغم أنها الاستحقاق الدستوري الخامس المتبقي والأقرب للمواطن الذي يتحمل تكاليف الإصلاح"</div>
+  
+<div style="text-align:center;background:#faece7;border-radius:10px;padding:clamp(14px,4vw,20px);margin-bottom:14px">
+  <p style="font-size:clamp(10px,2.5vw,11px);color:#5f5e5a;margin-bottom:4px">سنوات بلا مجالس محلية منتخبة</p>
+  <div id="v" style="font-size:clamp(52px,14vw,70px);font-weight:800;color:#D85A30;line-height:1">0</div>
+  <p style="font-size:clamp(14px,4vw,17px);font-weight:700;color:#D85A30;margin-top:3px">عامًا (منذ 2011)</p>
+</div>
+<div style="display:flex;flex-direction:column;gap:7px;margin-bottom:12px">
+  <div style="background:#edf7f3;border-radius:6px;padding:9px 12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px">
+    <span style="font-size:clamp(10px,2.5vw,11px);color:#5f5e5a">انتخابات رئاسية</span>
+    <span style="font-size:clamp(10px,2.5vw,11px);font-weight:700;color:#1D9E75">&#10003; منجز</span>
+  </div>
+  <div style="background:#edf7f3;border-radius:6px;padding:9px 12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px">
+    <span style="font-size:clamp(10px,2.5vw,11px);color:#5f5e5a">انتخابات مجلس النواب</span>
+    <span style="font-size:clamp(10px,2.5vw,11px);font-weight:700;color:#1D9E75">&#10003; منجز</span>
+  </div>
+  <div style="background:#edf7f3;border-radius:6px;padding:9px 12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px">
+    <span style="font-size:clamp(10px,2.5vw,11px);color:#5f5e5a">انتخابات مجلس الشيوخ</span>
+    <span style="font-size:clamp(10px,2.5vw,11px);font-weight:700;color:#1D9E75">&#10003; منجز</span>
+  </div>
+  <div style="background:#edf7f3;border-radius:6px;padding:9px 12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px">
+    <span style="font-size:clamp(10px,2.5vw,11px);color:#5f5e5a">الاستفتاء الدستوري</span>
+    <span style="font-size:clamp(10px,2.5vw,11px);font-weight:700;color:#1D9E75">&#10003; منجز</span>
+  </div>
+  <div style="background:#faece7;border-radius:6px;padding:9px 12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;border:1px solid #D85A30">
+    <span style="font-size:clamp(10px,2.5vw,11px);color:#993C1D;font-weight:600">المجالس المحلية — الأقرب للمواطن</span>
+    <span style="font-size:clamp(10px,2.5vw,11px);font-weight:700;color:#D85A30">&#10007; متأخر 15 عامًا</span>
+  </div>
+</div>
+<script>
+(function(){
+  var s=null;
+  function cu(ts){if(!s)s=ts;var p=Math.min((ts-s)/700,1),e=1-Math.pow(1-p,3);
+    document.getElementById("v").textContent=Math.round(e*15);
+    if(p<1)requestAnimationFrame(cu);else document.getElementById("v").textContent="15";}
+  setTimeout(function(){requestAnimationFrame(cu);},100);
+})();
+</script>
+  <p class="source">المصدر: تصريحات رسمية / مجلس النواب</p>
+</div>
+<script>
+(function(){
+  function notify(){var h=document.getElementById("root").offsetHeight;window.parent.postMessage({type:"chartResize",height:h},"*");}
+  setTimeout(notify,1400);window.addEventListener("resize",notify);
+  try{new ResizeObserver(function(){setTimeout(notify,80);}).observe(document.body);}catch(e){}
+})();
+</script>
+</body></html>
