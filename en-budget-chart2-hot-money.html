@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Growth of hot money in Egyptian Treasury bills</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+
+<style>
+  :root{--blue:#378ADD;--coral:#D85A30;--teal:#1D9E75;--amber:#BA7517;--gray:#888780;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:"Arial",sans-serif;background:#fff;color:#2c2c2a;direction:ltr;}
+  #root{padding:clamp(12px,3vw,20px);}
+  .hdr{border-left:3px solid #378ADD;padding-left:10px;margin-bottom:10px;}
+  .tag{font-size:clamp(9px,2vw,10px);font-weight:700;letter-spacing:.06em;color:var(--gray);margin-bottom:2px;}
+  .title{font-size:clamp(13px,3.5vw,15px);font-weight:700;line-height:1.4;margin-bottom:2px;}
+  .subtitle{font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;}
+  .callout{background:#f1efe8;border-left:3px solid #378ADD;padding:8px 11px;font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;line-height:1.6;margin:9px 0;font-style:italic;}
+  .source{font-size:clamp(9px,2vw,10px);color:var(--gray);margin-top:10px;line-height:1.4;text-align:left;}
+  .cards{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+  .card{flex:1;min-width:min(100px,44%);border-radius:8px;padding:clamp(9px,2.5vw,12px) clamp(10px,3vw,13px);}
+  @media(prefers-color-scheme:dark){
+    body{background:#1a1a18;color:#d3d1c7;}
+    .callout{background:#2c2c2a;color:#b4b2a9;}
+    .subtitle,.source{color:#b4b2a9;}
+  }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="hdr">
+    <p class="tag">Zawia3 · Infographic ② of ⑧</p>
+    <p class="title">Growth of hot money in Egyptian Treasury bills</p>
+    <p class="subtitle">USD billion; a fourfold rise in two years</p>
+  </div>
+  <div class="callout">"Hot money rose from USD 10 billion to USD 42 billion between 2023 and 2025, then lost a third in one month when war broke out"</div>
+  
+<div class="cards">
+  <div class="card" style="background:#eef4fb;text-align:center">
+    <p style="font-size:clamp(9px,2.2vw,10px);color:#5f5e5a;margin-bottom:3px">End of 2023</p>
+    <p style="font-size:clamp(20px,5.5vw,26px);font-weight:800;color:#888780" id="v1">0</p>
+    <p style="font-size:clamp(9px,2vw,10px);color:#888780;margin-top:1px">USD billion</p>
+  </div>
+  <div class="card" style="background:#eef4fb;text-align:center">
+    <p style="font-size:clamp(9px,2.2vw,10px);color:#5f5e5a;margin-bottom:3px">End of 2025 (peak)</p>
+    <p style="font-size:clamp(20px,5.5vw,26px);font-weight:800;color:#378ADD" id="v2">0</p>
+    <p style="font-size:clamp(9px,2vw,10px);color:#888780;margin-top:1px">USD billion</p>
+  </div>
+  <div class="card" style="background:#faece7;text-align:center">
+    <p style="font-size:clamp(9px,2.2vw,10px);color:#993C1D;margin-bottom:3px">March 2026 (after war broke out)</p>
+    <p style="font-size:clamp(20px,5.5vw,26px);font-weight:800;color:#D85A30" id="v3">0</p>
+    <p style="font-size:clamp(9px,2vw,10px);color:#993C1D;margin-top:1px">USD billion</p>
+  </div>
+</div>
+<div style="position:relative;width:100%;height:clamp(160px,42vw,190px)"><canvas id="c"></canvas></div>
+<script>
+(function(){
+  var dk=matchMedia("(prefers-color-scheme:dark)").matches;
+  var tc=dk?"#b4b2a9":"#5f5e5a",gc=dk?"rgba(255,255,255,.08)":"rgba(0,0,0,.07)";
+  var blue=dk?"#85B7EB":"#378ADD",coral=dk?"#F0997B":"#D85A30",gray=dk?"#B4B2A9":"#888780";
+  new Chart(document.getElementById("c"),{type:"bar",
+    data:{labels:["End of 2023","End of 2025","March 2026"],datasets:[{data:[10,42,27.1],backgroundColor:[gray,blue,coral],borderWidth:0,borderRadius:5}]},
+    options:{responsive:true,maintainAspectRatio:false,animation:{duration:900,easing:"easeOutQuart",delay:function(c){return c.dataIndex*120;}},
+    plugins:{legend:{display:false},tooltip:{backgroundColor:dk?"#2c2c2a":"#fff",borderColor:dk?"rgba(255,255,255,.1)":"rgba(0,0,0,.08)",borderWidth:1,titleColor:dk?"#d3d1c7":"#2c2c2a",bodyColor:tc,padding:10,titleFont:{family:"Arial"},bodyFont:{family:"Arial"},callbacks:{label:function(c){return c.raw+" USD billion";}}}},
+    scales:{x:{ticks:{color:tc,font:{size:10,family:"Arial"}},grid:{display:false},border:{color:gc}},y:{ticks:{color:tc,font:{size:10,family:"Arial"},callback:function(v){return v+"B$";}},grid:{color:gc},border:{display:false}}}}
+  });
+  var s=null;
+  function cu(ts){if(!s)s=ts;var p=Math.min((ts-s)/900,1),e=1-Math.pow(1-p,3);
+    document.getElementById("v1").textContent=(e*10).toFixed(0);
+    document.getElementById("v2").textContent=(e*42).toFixed(0);
+    document.getElementById("v3").textContent=(e*27.1).toFixed(1);
+    if(p<1)requestAnimationFrame(cu);else{document.getElementById("v1").textContent="10";document.getElementById("v2").textContent="42";document.getElementById("v3").textContent="27.1";}
+  }
+  setTimeout(function(){requestAnimationFrame(cu);},100);
+})();
+</script>
+  <p class="source">Source: Eye on Debt report, Egyptian Initiative for Personal Rights</p>
+</div>
+<script>
+(function(){
+  function notify(){var h=document.getElementById("root").offsetHeight;window.parent.postMessage({type:"chartResize",height:h},"*");}
+  setTimeout(notify,1400);window.addEventListener("resize",notify);
+  try{new ResizeObserver(function(){setTimeout(notify,80);}).observe(document.body);}catch(e){}
+})();
+</script>
+</body></html>

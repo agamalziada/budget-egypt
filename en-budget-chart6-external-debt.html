@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Egypt’s external debt payments in 2025</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+
+<style>
+  :root{--blue:#378ADD;--coral:#D85A30;--teal:#1D9E75;--amber:#BA7517;--gray:#888780;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:"Arial",sans-serif;background:#fff;color:#2c2c2a;direction:ltr;}
+  #root{padding:clamp(12px,3vw,20px);}
+  .hdr{border-left:3px solid #D85A30;padding-left:10px;margin-bottom:10px;}
+  .tag{font-size:clamp(9px,2vw,10px);font-weight:700;letter-spacing:.06em;color:var(--gray);margin-bottom:2px;}
+  .title{font-size:clamp(13px,3.5vw,15px);font-weight:700;line-height:1.4;margin-bottom:2px;}
+  .subtitle{font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;}
+  .callout{background:#f1efe8;border-left:3px solid #D85A30;padding:8px 11px;font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;line-height:1.6;margin:9px 0;font-style:italic;}
+  .source{font-size:clamp(9px,2vw,10px);color:var(--gray);margin-top:10px;line-height:1.4;text-align:left;}
+  .cards{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+  .card{flex:1;min-width:min(100px,44%);border-radius:8px;padding:clamp(9px,2.5vw,12px) clamp(10px,3vw,13px);}
+  @media(prefers-color-scheme:dark){
+    body{background:#1a1a18;color:#d3d1c7;}
+    .callout{background:#2c2c2a;color:#b4b2a9;}
+    .subtitle,.source{color:#b4b2a9;}
+  }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="hdr">
+    <p class="tag">Zawia3 · Infographic ⑥ of ⑧</p>
+    <p class="title">Egypt’s external debt payments in 2025</p>
+    <p class="subtitle">USD billion; USD 22 million a day in interest alone</p>
+  </div>
+  <div class="callout">"Egypt paid USD 8 billion in interest in 2025: USD 22 million a day going to creditors rather than citizens"</div>
+  
+<div style="text-align:center;background:#faece7;border-radius:10px;padding:clamp(12px,3.5vw,18px);margin-bottom:14px">
+  <p style="font-size:clamp(10px,2.5vw,11px);color:#5f5e5a;margin-bottom:4px">Total external debt payments in 2025</p>
+  <div id="v" style="font-size:clamp(36px,10vw,48px);font-weight:800;color:#D85A30;line-height:1">0</div>
+  <p style="font-size:clamp(13px,3.5vw,15px);font-weight:700;color:#D85A30;margin-top:3px">USD billion</p>
+</div>
+<div style="position:relative;width:100%;height:clamp(160px,42vw,185px)"><canvas id="c"></canvas></div>
+<div style="margin-top:10px;background:#2c2c2a;border-radius:7px;padding:clamp(9px,2.5vw,12px)">
+  <p style="font-size:clamp(9px,2vw,10px);font-weight:700;color:#D85A30;margin-bottom:5px">⚠ Interest alone = USD 22 million per day</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <div style="flex:1;min-width:min(100px,44%)">
+      <p style="font-size:clamp(9px,2vw,10px);color:rgba(255,255,255,.45);margin-bottom:2px">Annual interest</p>
+      <p style="font-size:clamp(14px,4vw,18px);font-weight:800;color:#fff">USD 8.06 billion</p>
+    </div>
+    <div style="flex:1;min-width:min(100px,44%)">
+      <p style="font-size:clamp(9px,2vw,10px);color:rgba(255,255,255,.45);margin-bottom:2px">24% of the total</p>
+      <p style="font-size:clamp(14px,4vw,18px);font-weight:800;color:#D85A30">No principal repaid</p>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var dk=matchMedia("(prefers-color-scheme:dark)").matches;
+  var tc=dk?"#b4b2a9":"#5f5e5a",gc=dk?"rgba(255,255,255,.08)":"rgba(0,0,0,.07)";
+  var coral=dk?"#F0997B":"#D85A30",blue=dk?"#85B7EB":"#378ADD";
+  var s=null;
+  function cu(ts){if(!s)s=ts;var p=Math.min((ts-s)/900,1),e=1-Math.pow(1-p,3);
+    document.getElementById("v").textContent=(e*33.4).toFixed(1);
+    if(p<1)requestAnimationFrame(cu);else document.getElementById("v").textContent="33.4";}
+  setTimeout(function(){requestAnimationFrame(cu);},100);
+  new Chart(document.getElementById("c"),{type:"bar",
+    data:{labels:[["Principal","(76%)"],["Interest","(24%)"]],datasets:[{data:[25.36,8.06],backgroundColor:[blue,coral],borderWidth:0,borderRadius:5}]},
+    options:{responsive:true,maintainAspectRatio:false,animation:{duration:900,easing:"easeOutQuart",delay:function(c){return c.dataIndex*150;}},
+    plugins:{legend:{display:false},tooltip:{backgroundColor:dk?"#2c2c2a":"#fff",borderColor:dk?"rgba(255,255,255,.1)":"rgba(0,0,0,.08)",borderWidth:1,titleColor:dk?"#d3d1c7":"#2c2c2a",bodyColor:tc,padding:10,titleFont:{family:"Arial"},bodyFont:{family:"Arial"},callbacks:{label:function(c){return c.raw+" USD billion";}}}},
+    scales:{x:{ticks:{color:tc,font:{size:11,family:"Arial"}},grid:{display:false},border:{color:gc}},y:{ticks:{color:tc,font:{size:10,family:"Arial"},callback:function(v){return v+"B$";}},grid:{color:gc},border:{display:false}}}}
+  });
+})();
+</script>
+  <p class="source">Source: Dr Medhat Nafei / Central Bank of Egypt data</p>
+</div>
+<script>
+(function(){
+  function notify(){var h=document.getElementById("root").offsetHeight;window.parent.postMessage({type:"chartResize",height:h},"*");}
+  setTimeout(notify,1400);window.addEventListener("resize",notify);
+  try{new ResizeObserver(function(){setTimeout(notify,80);}).observe(document.body);}catch(e){}
+})();
+</script>
+</body></html>
