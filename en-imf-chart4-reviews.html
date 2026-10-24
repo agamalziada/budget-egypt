@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Egypt’s IMF programme reviews and available financing, 2022–2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+
+<style>
+  :root{--blue:#378ADD;--coral:#D85A30;--teal:#1D9E75;--amber:#BA7517;--gray:#888780;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:"Arial",sans-serif;background:#fff;color:#2c2c2a;direction:ltr;}
+  #root{padding:clamp(12px,3vw,20px);}
+  .hdr{border-left:3px solid #378ADD;padding-left:10px;margin-bottom:10px;}
+  .tag{font-size:clamp(9px,2vw,10px);font-weight:700;letter-spacing:.06em;color:var(--gray);margin-bottom:2px;}
+  .title{font-size:clamp(13px,3.5vw,15px);font-weight:700;line-height:1.4;margin-bottom:2px;}
+  .subtitle{font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;}
+  .callout{background:#f1efe8;border-left:3px solid #378ADD;padding:8px 11px;font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;line-height:1.6;margin:9px 0;font-style:italic;}
+  .source{font-size:clamp(9px,2vw,10px);color:var(--gray);margin-top:10px;line-height:1.4;text-align:left;}
+  .cards{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+  .card{flex:1;min-width:min(100px,44%);border-radius:8px;padding:clamp(9px,2.5vw,12px) clamp(10px,3vw,13px);}
+  @media(prefers-color-scheme:dark){
+    body{background:#1a1a18;color:#d3d1c7;}
+    .callout{background:#2c2c2a;color:#b4b2a9;}
+    .subtitle,.source{color:#b4b2a9;}
+  }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="hdr">
+    <p class="tag">Zawia3 · Infographic ④ of ⑧</p>
+    <p class="title">Egypt’s IMF programme reviews and available financing, 2022–2026</p>
+    <p class="subtitle">USD billion per review; combined reviews 5 and 6 were the programme’s largest</p>
+  </div>
+  <div class="callout">"The combined fifth and sixth reviews made USD 2.3 billion available at once, the largest amount in the current programme"</div>
+  
+<div style="position:relative;width:100%;height:clamp(190px,50vw,220px)"><canvas id="c"></canvas></div>
+<div style="margin-top:10px;background:#fdf6e8;border-left:3px solid #BA7517;padding:9px 12px;border-radius:0 6px 6px 0">
+  <p style="font-size:clamp(11px,2.8vw,12px);color:#5f5e5a">Total after the increase: <strong style="color:#BA7517">USD 8.0 billion</strong>; the eighth review (November 2026) marks the end of the programme, not the debt</p>
+</div>
+<script>
+(function(){
+  var dk=matchMedia("(prefers-color-scheme:dark)").matches;
+  var tc=dk?"#b4b2a9":"#5f5e5a",gc=dk?"rgba(255,255,255,.08)":"rgba(0,0,0,.07)";
+  var blue=dk?"#85B7EB":"#378ADD",coral=dk?"#F0997B":"#D85A30",amber=dk?"#FAC775":"#BA7517";
+  var labels=[
+    ["Approval","Dec 2022"],
+    ["Reviews 1+2","March 2024"],
+    ["Review 3","July 2024"],
+    ["Review 4","March 2025"],
+    ["Reviews 5+6","February 2026"],
+    ["Review 7","July 2026"],
+    ["Review 8~","Nov 2026"]
+  ];
+  var data=[3.0,2.0,0.82,1.20,2.30,1.50,1.50];
+  var colors=[blue,amber,blue,blue,coral,blue,amber];
+  new Chart(document.getElementById("c"),{type:"bar",
+    data:{labels:labels,datasets:[{data:data,backgroundColor:colors,borderWidth:0,borderRadius:5}]},
+    options:{responsive:true,maintainAspectRatio:false,animation:{duration:1000,easing:"easeOutQuart",delay:function(c){return c.dataIndex*80;}},
+    plugins:{legend:{display:false},tooltip:{backgroundColor:dk?"#2c2c2a":"#fff",borderColor:dk?"rgba(255,255,255,.1)":"rgba(0,0,0,.08)",borderWidth:1,titleColor:dk?"#d3d1c7":"#2c2c2a",bodyColor:tc,padding:10,titleFont:{family:"Arial"},bodyFont:{family:"Arial"},callbacks:{label:function(c){if(c.dataIndex===0)return "Programme size at approval: USD 3 billion";if(c.dataIndex===1)return "Raised to USD 8 billion in this review";return c.raw+" USD billion";}}}},
+    scales:{x:{ticks:{color:tc,font:{size:8,family:"Arial"},maxRotation:0},grid:{display:false},border:{color:gc}},
+    y:{ticks:{color:tc,font:{size:10,family:"Arial"},callback:function(v){return v+"B$";}},grid:{color:gc},border:{display:false}}}}
+  });
+})();
+</script>
+  <p class="source">Source: International Monetary Fund</p>
+</div>
+<script>
+(function(){
+  function notify(){var h=document.getElementById("root").offsetHeight;window.parent.postMessage({type:"chartResize",height:h},"*");}
+  setTimeout(notify,1400);window.addEventListener("resize",notify);
+  try{new ResizeObserver(function(){setTimeout(notify,80);}).observe(document.body);}catch(e){}
+})();
+</script>
+</body></html>

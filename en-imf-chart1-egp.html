@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>The Egyptian pound against the US dollar (2014–2026)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+
+<style>
+  :root{--blue:#378ADD;--coral:#D85A30;--teal:#1D9E75;--amber:#BA7517;--gray:#888780;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:"Arial",sans-serif;background:#fff;color:#2c2c2a;direction:ltr;}
+  #root{padding:clamp(12px,3vw,20px);}
+  .hdr{border-left:3px solid #D85A30;padding-left:10px;margin-bottom:10px;}
+  .tag{font-size:clamp(9px,2vw,10px);font-weight:700;letter-spacing:.06em;color:var(--gray);margin-bottom:2px;}
+  .title{font-size:clamp(13px,3.5vw,15px);font-weight:700;line-height:1.4;margin-bottom:2px;}
+  .subtitle{font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;}
+  .callout{background:#f1efe8;border-left:3px solid #D85A30;padding:8px 11px;font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;line-height:1.6;margin:9px 0;font-style:italic;}
+  .source{font-size:clamp(9px,2vw,10px);color:var(--gray);margin-top:10px;line-height:1.4;text-align:left;}
+  .cards{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+  .card{flex:1;min-width:min(100px,44%);border-radius:8px;padding:clamp(9px,2.5vw,12px) clamp(10px,3vw,13px);}
+  @media(prefers-color-scheme:dark){
+    body{background:#1a1a18;color:#d3d1c7;}
+    .callout{background:#2c2c2a;color:#b4b2a9;}
+    .subtitle,.source{color:#b4b2a9;}
+  }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="hdr">
+    <p class="tag">Zawia3 · Infographic ① of ⑧</p>
+    <p class="title">The Egyptian pound against the US dollar (2014–2026)</p>
+    <p class="subtitle">EGP per US dollar; the pound lost more than 85% of its value in ten years</p>
+  </div>
+  <div class="callout">"The pound lost more than 85% of its value between 2014 and 2024 through two flotations: the first was an IMF condition in 2016, and the second was the price of escaping the dollar crisis in 2024"</div>
+  
+<div class="cards" style="margin-bottom:12px">
+  <div class="card" style="background:#edf7f3;text-align:center">
+    <p style="font-size:clamp(9px,2.2vw,10px);color:#5f5e5a;margin-bottom:3px">2014: starting point</p>
+    <p style="font-size:clamp(18px,5vw,22px);font-weight:800;color:#1D9E75">EGP 7.15</p>
+  </div>
+  <div class="card" style="background:#faece7;text-align:center">
+    <p style="font-size:clamp(9px,2.2vw,10px);color:#993C1D;margin-bottom:3px">March 2024: peak</p>
+    <p style="font-size:clamp(18px,5vw,22px);font-weight:800;color:#D85A30">~EGP 50</p>
+  </div>
+  <div class="card" style="background:#faece7;text-align:center">
+    <p style="font-size:clamp(9px,2.2vw,10px);color:#993C1D;margin-bottom:3px">Loss</p>
+    <p style="font-size:clamp(18px,5vw,22px);font-weight:800;color:#D85A30">−85%</p>
+  </div>
+</div>
+<div style="position:relative;width:100%;height:clamp(190px,50vw,220px)"><canvas id="c"></canvas></div>
+<script>
+(function(){
+  var dk=matchMedia("(prefers-color-scheme:dark)").matches;
+  var tc=dk?"#b4b2a9":"#5f5e5a",gc=dk?"rgba(255,255,255,.08)":"rgba(0,0,0,.07)";
+  var coral=dk?"#F0997B":"#D85A30",blue=dk?"#85B7EB":"#378ADD",teal=dk?"#5DCAA5":"#1D9E75";
+  var labels=[
+    "2014",
+    ["Oct","2016"],
+    ["Nov","2016"],
+    ["2017","2021~"],
+    ["March","2022"],
+    ["Oct","2022"],
+    ["January","2023"],
+    ["End of","2023"],
+    ["March","2024"],
+    ["January","2026"],
+    ["Aug","2026"]
+  ];
+  var data=[7.15,8.80,17.0,15.7,19.7,24.3,27.2,30.8,50.0,47.4,49.0];
+  var ptColors=data.map(function(v,i){
+    if(i===2||i===8)return coral;
+    if(i===0)return teal;
+    return blue;
+  });
+  new Chart(document.getElementById("c"),{
+    type:"line",
+    data:{labels:labels,datasets:[
+      {data:data,borderColor:coral,borderWidth:2,pointBackgroundColor:ptColors,
+       pointRadius:[4,3,6,3,3,3,3,3,6,3,3],
+       tension:0.1,fill:true,backgroundColor:dk?"rgba(216,90,48,0.08)":"rgba(216,90,48,0.06)"}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,animation:{duration:1000,easing:"easeOutQuart"},
+    plugins:{legend:{display:false},tooltip:{backgroundColor:dk?"#2c2c2a":"#fff",borderColor:dk?"rgba(255,255,255,.1)":"rgba(0,0,0,.08)",borderWidth:1,titleColor:dk?"#d3d1c7":"#2c2c2a",bodyColor:tc,padding:10,titleFont:{family:"Arial"},bodyFont:{family:"Arial"},callbacks:{label:function(c){return c.raw+" EGP / USD";}}}},
+    scales:{x:{ticks:{color:tc,font:{size:8,family:"Arial"},maxRotation:0},grid:{display:false},border:{color:gc}},
+    y:{ticks:{color:tc,font:{size:9,family:"Arial"},callback:function(v){return v+" EGP";}},grid:{color:gc},border:{display:false}}}}
+  });
+})();
+</script>
+  <p class="source">Source: Central Bank of Egypt / Reuters / Bloomberg</p>
+</div>
+<script>
+(function(){
+  function notify(){var h=document.getElementById("root").offsetHeight;window.parent.postMessage({type:"chartResize",height:h},"*");}
+  setTimeout(notify,1400);window.addEventListener("resize",notify);
+  try{new ResizeObserver(function(){setTimeout(notify,80);}).observe(document.body);}catch(e){}
+})();
+</script>
+</body></html>

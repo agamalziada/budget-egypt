@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>IMF programmes with Egypt since 2016</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+
+<style>
+  :root{--blue:#378ADD;--coral:#D85A30;--teal:#1D9E75;--amber:#BA7517;--gray:#888780;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:"Arial",sans-serif;background:#fff;color:#2c2c2a;direction:ltr;}
+  #root{padding:clamp(12px,3vw,20px);}
+  .hdr{border-left:3px solid #378ADD;padding-left:10px;margin-bottom:10px;}
+  .tag{font-size:clamp(9px,2vw,10px);font-weight:700;letter-spacing:.06em;color:var(--gray);margin-bottom:2px;}
+  .title{font-size:clamp(13px,3.5vw,15px);font-weight:700;line-height:1.4;margin-bottom:2px;}
+  .subtitle{font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;}
+  .callout{background:#f1efe8;border-left:3px solid #378ADD;padding:8px 11px;font-size:clamp(11px,2.5vw,12px);color:#5f5e5a;line-height:1.6;margin:9px 0;font-style:italic;}
+  .source{font-size:clamp(9px,2vw,10px);color:var(--gray);margin-top:10px;line-height:1.4;text-align:left;}
+  .cards{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+  .card{flex:1;min-width:min(100px,44%);border-radius:8px;padding:clamp(9px,2.5vw,12px) clamp(10px,3vw,13px);}
+  @media(prefers-color-scheme:dark){
+    body{background:#1a1a18;color:#d3d1c7;}
+    .callout{background:#2c2c2a;color:#b4b2a9;}
+    .subtitle,.source{color:#b4b2a9;}
+  }
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="hdr">
+    <p class="tag">Zawia3 · Infographic ③ of ⑧</p>
+    <p class="title">IMF programmes with Egypt since 2016</p>
+    <p class="subtitle">5 programmes in 10 years; total financing exceeds SDR 20 billion</p>
+  </div>
+  <div class="callout">"Five programmes in ten years: after the March 2024 increase, the latest alone equals two-thirds of the 2016 programme"</div>
+  
+<div style="position:relative;width:100%;height:clamp(200px,52vw,235px)"><canvas id="c"></canvas></div>
+<div style="margin-top:10px;background:#eef4fb;border-radius:7px;padding:9px 12px">
+  <p style="font-size:clamp(11px,2.8vw,12px);color:#5f5e5a">Total financing since 2016: <strong style="color:#378ADD">SDR 20.51 billion</strong>; equivalent to approximately <strong style="color:#378ADD">USD 28 billion</strong></p>
+</div>
+<script>
+(function(){
+  var dk=matchMedia("(prefers-color-scheme:dark)").matches;
+  var tc=dk?"#b4b2a9":"#5f5e5a",gc=dk?"rgba(255,255,255,.08)":"rgba(0,0,0,.07)";
+  var blue=dk?"#85B7EB":"#378ADD",teal=dk?"#5DCAA5":"#1D9E75",
+      coral=dk?"#F0997B":"#D85A30",amber=dk?"#FAC775":"#BA7517",gray=dk?"#B4B2A9":"#888780";
+  var labels=[
+    ["EFF 2016","(Extended Fund Facility)"],
+    ["RFI 2020","(Rapid Financing Instrument)"],
+    ["SBA 2020","(Stand-By Arrangement)"],
+    ["EFF 2022","(original)"],
+    ["EFF 2024","(after increase)"]
+  ];
+  new Chart(document.getElementById("c"),{type:"bar",
+    data:{labels:labels,datasets:[{data:[12.0,2.8,5.2,3.0,8.0],backgroundColor:[blue,amber,teal,gray,coral],borderWidth:0,borderRadius:5}]},
+    options:{indexAxis:"y",responsive:true,maintainAspectRatio:false,animation:{duration:1000,easing:"easeOutQuart",delay:function(c){return c.dataIndex*80;}},
+    plugins:{legend:{display:false},tooltip:{backgroundColor:dk?"#2c2c2a":"#fff",borderColor:dk?"rgba(255,255,255,.1)":"rgba(0,0,0,.08)",borderWidth:1,titleColor:dk?"#d3d1c7":"#2c2c2a",bodyColor:tc,padding:10,titleFont:{family:"Arial"},bodyFont:{family:"Arial"},callbacks:{label:function(c){return c.raw+" USD billion";}}}},
+    scales:{x:{ticks:{color:tc,font:{size:10,family:"Arial"},callback:function(v){return v+"B$";}},grid:{color:gc},border:{display:false}},
+    y:{position:"right",ticks:{color:tc,font:{size:9,family:"Arial"}},grid:{display:false},border:{display:false}}}}
+  });
+})();
+</script>
+  <p class="source">Source: International Monetary Fund, official data</p>
+</div>
+<script>
+(function(){
+  function notify(){var h=document.getElementById("root").offsetHeight;window.parent.postMessage({type:"chartResize",height:h},"*");}
+  setTimeout(notify,1400);window.addEventListener("resize",notify);
+  try{new ResizeObserver(function(){setTimeout(notify,80);}).observe(document.body);}catch(e){}
+})();
+</script>
+</body></html>
